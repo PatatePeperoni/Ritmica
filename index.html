@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ritmica 0.10 · Web</title>
+<title>Ritmica 0.12 · Web</title>
 <style>
 :root { font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; color:#20252b; background:#f6f7f8; font-size:13px; }
 * { box-sizing:border-box; }
@@ -97,6 +97,67 @@ main { min-width:0;display:flex;flex-direction:column; }
 input[type=file] { display:none; }
 @media(max-width:1050px) { .app { grid-template-columns:205px minmax(0,1fr); }.tool-card.durations { min-width:300px; }.workspace { padding:14px; } }
 @media(max-width:700px) { .app { display:block; } aside { border-right:none;border-bottom:1px solid #ddd; } .tool-card { width:100%;min-width:0!important; }.dur-grid { grid-template-columns:repeat(8,minmax(0,1fr)); }.topbar { padding:11px; }.workspace { padding:11px; } }
+
+/* Ritmica 0.12 — interfaccia compatta, chiara/scura */
+:root{color-scheme:light;--bg:#e9ebef;--sidebar:#f4f5f7;--surface:#fff;--surface-alt:#f7f8fa;--ink:#26313b;--muted:#73808c;--line:#d8dde3;--active:#346dc3;--active-bg:#e5efff;--paper:#fff;--shadow:0 12px 34px #202b3c12,0 1px 2px #202b3c1c;--score-text:#222}
+html.theme-dark{color-scheme:dark;--bg:#20252d;--sidebar:#262c35;--surface:#2d3540;--surface-alt:#343e49;--ink:#edf2f8;--muted:#a6b1bd;--line:#44515f;--active:#8eb7ff;--active-bg:#304663;--paper:#fbfbfd;--shadow:0 12px 40px #0005;--score-text:#222}
+html,body{background:var(--bg);color:var(--ink)}
+button,input,select{color:var(--ink)}
+.app{grid-template-columns:218px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--sidebar);border-right:1px solid var(--line);padding:15px 12px;gap:18px}
+.brand{display:flex;align-items:center;gap:9px;padding:7px 8px 8px}
+.brand:before{content:'♫';width:28px;height:28px;border-radius:8px;background:var(--active);color:#fff;display:grid;place-items:center;font-size:18px}
+.brand strong{font-size:16px;letter-spacing:-.4px}
+.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:9px}
+.staff-item{padding:9px 11px;border-radius:8px;color:var(--ink)}
+.staff-item.selected{background:var(--active-bg);border-color:transparent;color:var(--active)}
+.staff-item:hover{background:var(--active-bg)}
+.staff-sub{line-height:1.8}
+.staff-sub .small-btn{font-size:10px;padding:4px 5px}.staff-sub .small-btn.selected{background:var(--active-bg);color:var(--active);border-color:var(--active)}
+select,input[type=number]{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:7px 7px}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--active);outline-offset:2px}
+.mini-label{color:var(--muted);font-size:10px}
+.side-add,.small-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:7px}
+.audio{gap:10px}.audio label,#midiInfo{color:var(--muted)}
+main{background:var(--bg);min-height:100vh}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:9px 21px;gap:8px;min-height:63px}
+.document-name{font-size:15px;font-weight:660;color:var(--ink);width:260px}
+#documentCaption{font-size:10px;color:var(--muted)}
+.top-actions{gap:5px}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:7px 10px;min-height:34px}
+.btn:hover,.dur-key:hover{background:var(--surface-alt)}
+.btn.primary{background:var(--active);color:#fff;border-color:var(--active)}
+.btn.active,.btn.hot,.dur-key.selected{background:var(--active-bg);border-color:var(--active);color:var(--active)}
+.icon-btn{min-width:34px;padding:7px 9px;font-size:17px;line-height:18px}
+.topbar-divider{height:22px;width:1px;background:var(--line);margin:0 4px}
+#themeToggle{font-size:16px}
+.workspace{padding:14px 20px 20px;display:flex;flex-direction:column;min-height:calc(100vh - 105px)}
+.tools{align-items:stretch;gap:8px;margin-bottom:9px}
+.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.tool-card.durations{flex:0 1 450px;min-width:340px}
+.tool-card.modifiers{min-width:225px;flex:0 1 260px}
+.tag{color:var(--muted);font-size:10px;margin-bottom:7px;text-transform:uppercase;letter-spacing:.055em}
+.dur-grid{grid-template-columns:repeat(8,minmax(33px,1fr));gap:4px}
+.dur-key{background:var(--surface);border-color:var(--line);border-radius:7px;min-height:49px;padding:4px 0;gap:2px;color:var(--ink)}
+.dur-key .music{font-size:23px;height:25px;line-height:25px}
+.dur-key small{font-size:10px;color:var(--muted)}
+.shortcut-help{max-width:215px;color:var(--muted);font-size:10px;padding:8px 5px;line-height:1.6}
+.info-line{color:var(--muted);margin:1px 3px 9px}
+.info-line strong{color:var(--ink)}
+.paper{background:transparent;border:0;border-radius:0;overflow:visible;display:flex;flex-direction:column;min-height:320px;flex:1}
+.paper-header{background:transparent;border:0;padding:5px 6px 12px;color:var(--muted)}
+.paper-header select{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.score-holder{background:var(--paper);border:1px solid #d8dbdf;border-radius:4px;box-shadow:var(--shadow);width:100%;min-height:360px;padding:36px 20px 45px;scrollbar-color:#b5bbc4 transparent}
+.score-holder.galley{min-height:410px}
+.statusbar{background:var(--surface);border-color:var(--line);color:var(--muted);padding:8px 20px}
+.footer-panel,.footer-block{color:var(--muted)}
+.footer-panel details{padding:5px 0}
+.toast{background:#273547;color:#fff;border-radius:9px}
+html.theme-dark .score-holder{border-color:#65717d}
+#tupletUnitPick{width:48px;height:34px;padding:4px 6px;border-radius:8px;font-family:Georgia,serif;font-size:15px}html.theme-dark .pkey{background:var(--surface);border-color:var(--line);color:var(--ink)}
+html.theme-dark .pkey.black{background:#111923;color:#fff}
+@media (max-width:1180px){.shortcut-help{display:none}.tools{flex-wrap:wrap}.tool-card.durations{flex:1}}
+@media (max-width:700px){.app{display:block}aside{position:static;height:auto;overflow:visible;border-right:0;border-bottom:1px solid var(--line)}.workspace{padding:10px}.topbar{padding:9px}.tools{flex-wrap:wrap}.tool-card.durations{min-width:0}.paper{min-height:290px}.score-holder{padding:20px 10px;min-height:270px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js" defer></script>
 <script>
@@ -235,14 +296,15 @@ function placeRhythm(key,rest=false){
  const p=currentPart(),v=stream(),d=DURATIONS.find(x=>x.key===key);if(!d)return;
  const grace=gracePending||(graceHeld?'acciaccatura':null);if(grace&&rest){toast('Gli abbellimenti richiedono una nota.');return;}
  const trip=pendingTriplet;if(trip&&grace){toast('Termina la terzina prima di aggiungere un abbellimento.');return;}
- if(trip&&trip.base&&trip.base!==key){toast('La terzina attiva richiede tre durate uguali.');return;}
- const candidate={id:uid(),base:key,dot:false,rest,pitches:[],tuplet:trip?trip.id:null,tieToNext:false,...(grace?{grace}:{})};
+ if(trip&&trip.mode!=='mixed'&&trip.base&&trip.base!==key){toast('La terzina attiva richiede tre durate uguali.');return;}
+ if(trip?.mode==='mixed'&&trip.used+d.ticks>trip.target+.001){toast('La figura supera la durata della terzina mista.');return;}
+ const candidate={id:uid(),base:key,dot:false,rest,pitches:[],tuplet:trip?trip.id:null,...(trip?.mode==='mixed'?{tupletMode:'mixed',tupletUnit:trip.unitKey}:{}),tieToNext:false,...(grace?{grace}:{})};
  // Una terzina può essere scritta solo interamente nella stessa battuta.
  if(trip){
    const target=insertTarget?.partId===chosenPart&&insertTarget.voice===chosenVoice?insertTarget:null;
    const at=target?endPosition(v.slice(0,target.index)):endPosition(v);
    const available=barCapacity(at.bar)-at.t;
-   if(trip.index===0&&3*measureTicks(candidate)>available+.001){toast('La terzina non può attraversare la stanghetta.');return;}
+   if(trip.index===0&&(trip.mode==='mixed'?trip.target*2/3:3*measureTicks(candidate))>available+.001){toast('La terzina non può attraversare la stanghetta.');return;}
  }
  saveUndo();const added=insertAtCursor(v,candidate);
  if(added.error!==undefined){undoStack.pop();toast(added.error);return;}
@@ -252,7 +314,12 @@ function placeRhythm(key,rest=false){
  const complete=usedTicks(eventMeasures(v)[writtenBar]||[])>=barCapacity(writtenBar)-.001;
  editContext='rhythm';selectedId=candidate.id;lastRhythmId=candidate.id;lastDotId=grace?null:candidate.id;
  durationKey=key;armedSelectionId=null;rhythmsSincePitch++;seekPitch();
- if(trip){trip.base=key;trip.index++;if(trip.index===3)pendingTriplet=null;}
+ if(trip){trip.base=key;trip.index++;
+   if(trip.mode==='mixed'){
+     trip.used+=d.ticks;
+     if(Math.abs(trip.used-trip.target)<.001)pendingTriplet=null;
+   }else if(trip.index===3)pendingTriplet=null;
+ }
  if(gracePending)gracePending=null;
  insertTarget={partId:chosenPart,voice:chosenVoice,bar:complete&&found===v.length-1?writtenBar+1:writtenBar,index:found+1};
  focusPitchId=null;
@@ -279,7 +346,15 @@ function applyDot(){
  const found=lookupEvent(lastDotId);
  if(!found||found.part.id!==chosenPart||found.voice!==chosenVoice||(found.event.entryDot??found.event.dot)){toast('Il punto si applica solo all’ultima figura inserita.');return;}
  if(found.event.grace){toast('Non è disponibile il punto per gli abbellimenti.');return;}
- if(found.event.tuplet){toast('In questa versione non sono ancora disponibili note puntate dentro una terzina.');return;}
+ if(found.event.tuplet){
+   if(found.event.tupletMode!=='mixed'){toast('Il punto nelle terzine rapide non è disponibile.');return;}
+   const groupId=found.event.tuplet,group=stream().filter(e=>e.tuplet===groupId);
+   const unit=DURATIONS.find(d=>d.key===found.event.tupletUnit);
+   const used=group.reduce((sum,e)=>sum+([...DURATIONS,...EXTRA_DURATIONS].find(d=>d.key===e.base).ticks)*(e.dot?1.5:1),0);
+   const extra=([...DURATIONS,...EXTRA_DURATIONS].find(d=>d.key===found.event.base).ticks)*.5;
+   if(!unit||used+extra>unit.ticks*3+.001){toast('Il punto supera lo spazio della terzina.');return;}
+   if(pendingTriplet?.id===groupId){pendingTriplet.used+=extra;if(Math.abs(pendingTriplet.used-pendingTriplet.target)<.001)pendingTriplet=null;}
+ }
  const v=stream(),first=found.event;
  const group=first.splitGroup;
  const indices=group?v.map((e,i)=>e.splitGroup===group?i:-1).filter(i=>i>=0):[found.index];
@@ -296,7 +371,24 @@ function applyDot(){
  if(tail){const idx=v.indexOf(tail),bar=findEventBar(v,tail.id);insertTarget={partId:chosenPart,voice:chosenVoice,bar:idx===v.length-1&&usedTicks(eventMeasures(v)[bar]||[])>=barCapacity(bar)-.001?bar+1:bar,index:idx+1};}
  focusPitchId=null;refresh();synthDot();setStatus('Punto aggiunto. La figura prosegue nella battuta successiva se necessario.');
 }
-function beginTriplet(){if(pendingTriplet){pendingTriplet=null;toast('Terzina annullata.');}else{pendingTriplet={id:uid(),base:null,index:0};toast('Terzina attiva: inserisci tre note o pause dello stesso valore.');}refresh();}
+function beginTriplet(){if(pendingTriplet){pendingTriplet=null;toast('Terzina annullata.');}else{pendingTriplet={id:uid(),base:null,index:0,mode:'standard'};toast('Terzina rapida: tre figure uguali.');}refresh();}
+function beginMixedTriplet(){
+ if(pendingTriplet){pendingTriplet=null;toast('Terzina annullata.');refresh();return;}
+ const unit=DURATIONS.find(d=>d.key===($('tupletUnitPick')?.value||durationKey));
+ if(!unit)return;
+ pendingTriplet={id:uid(),base:null,index:0,mode:'mixed',unitKey:unit.key,target:3*unit.ticks,used:0};
+ toast('Terzina mista: unità '+unit.name+'. Completa tre unità combinando note e pause.');refresh();
+}
+function expectedTuplet(group){
+ if(!group.length)return false;
+ if(group[0].tupletMode==='mixed'){
+  const unit=DURATIONS.find(d=>d.key===group[0].tupletUnit);
+  if(!unit)return false;
+  const sum=group.reduce((a,e)=>a+([...DURATIONS,...EXTRA_DURATIONS].find(d=>d.key===e.base)?.ticks||0)*(e.dot?1.5:1),0);
+  return group.length>=2&&Math.abs(sum-unit.ticks*3)<.001;
+ }
+ return group.length===3;
+}
 function toggleTie(){const s=stream();const target=lookupEvent(selectedId)|| (s.length?{event:s[s.length-1],part:currentPart(),voice:chosenVoice}:null);if(!target||target.event.rest){toast('Seleziona una nota, non una pausa.');return;}saveUndo();editContext='rhythm';target.event.tieToNext=!target.event.tieToNext;refresh();toast(target.event.tieToNext?'Legatura di valore impostata (necessita di una nota uguale successiva).':'Legatura rimossa.');}
 function restsForTicks(ticks){
  const out=[];const defs=[...DURATIONS].reverse();let left=ticks;
@@ -316,7 +408,7 @@ function deleteEvent(){
  const current=v[index];
  const ids=new Set(current.tuplet?v.filter(e=>e.tuplet===current.tuplet).map(e=>e.id):
    current.splitGroup?v.filter(e=>e.splitGroup===current.splitGroup).map(e=>e.id):[current.id]);
- if(current.tuplet&&ids.size!==3){toast('Terzina incompleta: correggi il gruppo prima di cancellare.');return;}
+ if(current.tuplet&&!expectedTuplet(v.filter(e=>e.tuplet===current.tuplet))){toast('Terzina incompleta: correggi il gruppo prima di cancellare.');return;}
  const firstRemoved=v.findIndex(e=>ids.has(e.id));
  let previous=null;
  for(let i=firstRemoved-1;i>=0;i--){
@@ -490,10 +582,21 @@ function respell(){
  if(!f||f.part.id!==chosenPart||f.voice!==chosenVoice||f.event.rest||!f.event.pitches.length)f=lookupEvent(selectedId);
  if(!f||f.event.rest||!f.event.pitches.length){toast('Non ci sono note da respellare.');return;}
  saveUndo();const converted=f.event.pitches.map(p=>{
-   const a=candidates(p.midi);if(a.length<2)return p;
-   a.sort((x,y)=>Math.abs(x.alter)-Math.abs(y.alter)||DIAT.indexOf(x.step)-DIAT.indexOf(y.step));
-   const i=a.findIndex(q=>q.step===p.step&&q.alter===p.alter&&q.octave===p.octave);
-   return a[(i+1+a.length)%a.length];
+   const all=candidates(p.midi);
+   if(all.length<2)return p;
+   // La scala cicla prima fra grafie di uso comune (♭, ♮, ♯).
+   // Le doppie alterazioni sono disponibili soltanto dopo queste.
+   const ctx=spellingContext(f.part.voices[f.voice],f.index);
+   const lead=spellPitch(p.midi,null,ctx);
+   const cost=q=>{
+     const normal=Math.abs(q.alter)<=1?0:100;
+     const keyFit=q.alter===keyAlter(q.step)?-3:0;
+     const preferred=q.step===lead.step&&q.alter===lead.alter?-12:0;
+     return normal+preferred+keyFit+Math.abs(q.alter)*2+DIAT.indexOf(q.step)*.01;
+   };
+   all.sort((a,b)=>cost(a)-cost(b));
+   const ix=all.findIndex(q=>q.step===p.step&&q.alter===p.alter&&q.octave===p.octave);
+   return clone(all[(ix+1+all.length)%all.length]);
  });
  f.event.pitches=converted;
  if(f.event.splitGroup)for(const piece of f.part.voices[f.voice])if(piece.splitGroup===f.event.splitGroup)piece.pitches=clone(converted);
@@ -531,7 +634,7 @@ function movePitch(dir){
 function changeClef(clef){if(!['treble','bass','alto'].includes(clef))return;saveUndo();currentPart().clef=clef;refresh();}
 function refreshToolbar(){
  for(const d of DURATIONS){const b=$('dur-'+d.key);if(b)b.classList.toggle('selected',durationKey===d.key);}
- $('tripletButton').classList.toggle('hot',!!pendingTriplet);for(const b of document.querySelectorAll('[data-acc]'))b.classList.toggle('hot',pendingAcc!==null&&Number(b.dataset.acc)===pendingAcc);
+ $('tripletButton').classList.toggle('hot',pendingTriplet?.mode==='standard');$('mixedTripletButton').classList.toggle('hot',pendingTriplet?.mode==='mixed');for(const b of document.querySelectorAll('[data-acc]'))b.classList.toggle('hot',pendingAcc!==null&&Number(b.dataset.acc)===pendingAcc);
  $('undo').disabled=!undoStack.length;$('redo').disabled=!redoStack.length;
 }
 function refreshStaffList(){const target=$('staffList');target.textContent='';
@@ -540,13 +643,13 @@ function refreshStaffList(){const target=$('staffList');target.textContent='';
   const button=document.createElement('button');button.className='staff-item'+(group.some(p=>p.id===chosenPart)?' selected':'');button.type='button';button.textContent=part.name;
   button.addEventListener('click',()=>selectStaff(part.id));wrap.append(button);
   if(group.length===2){const sub=document.createElement('div');sub.className='staff-sub';sub.style.padding='0 8px';
-    for(const [i,p] of group.entries()){const b=document.createElement('button');b.className='small-btn';b.style.marginRight='3px';b.style.background=chosenPart===p.id?'#dcecf4':'';b.textContent=i===0?'Rigo superiore':'Rigo inferiore';b.addEventListener('click',()=>selectStaff(p.id));sub.append(b);}wrap.append(sub);}
+    for(const [i,p] of group.entries()){const b=document.createElement('button');b.className='small-btn';b.style.marginRight='3px';b.classList.toggle('selected',chosenPart===p.id);b.textContent=i===0?'Rigo superiore':'Rigo inferiore';b.addEventListener('click',()=>selectStaff(p.id));sub.append(b);}wrap.append(sub);}
   target.append(wrap);
  }
  $('partCount').textContent=logicalParts().length;
 }
 function refresh(){refreshStaffList();$('voice').value=String(chosenVoice);$('clef').value=currentPart().clef;$('meter').value=score.meter.join('/');$('pickup').value=String(score.pickupTicks||0);$('keySig').value=String(score.fifths);$('mode').value=score.mode||'major';$('tempo').value=score.tempo;$('title').value=score.title;$('documentCaption').textContent=`${score.meter.join('/')} · ${score.mode==='minor'?keyLabel():'Maggiore'} · ${logicalParts().length} strumenti`;
- $('selectionInfo').innerHTML=`<strong>${esc(currentPart().name)} · Voce ${chosenVoice+1}</strong> · durata ${DURATIONS.find(d=>d.key===durationKey).name}${pendingTriplet?' · terzina '+(pendingTriplet.index+1)+'/3':''}${gracePending?' · appoggiatura':''}`;
+ $('selectionInfo').innerHTML=`<strong>${esc(currentPart().name)} · Voce ${chosenVoice+1}</strong> · durata ${DURATIONS.find(d=>d.key===durationKey).name}${pendingTriplet?' · '+(pendingTriplet.mode==='mixed'?'terzina mista '+(pendingTriplet.used/pendingTriplet.target*100).toFixed(0)+'%':'terzina '+(pendingTriplet.index+1)+'/3'):''}${gracePending?' · appoggiatura':''}`;
  $('scoreStats').textContent=`${eventCount()} eventi · ${barsCount()} battut${barsCount()===1?'a':'e'}`;
  refreshToolbar();queueRender();}
 function focusScoreSelection(){
@@ -670,6 +773,8 @@ function updateMidiStatus(){
 // L'autoconnessione è consentita solo dopo un consenso già dato per questa origine.
 // I permessi vengono gestiti dal browser: non possiamo concederli o persisterli noi.
 const MIDI_OPT_IN='ritmica-midi-auto';
+const THEME_KEY='ritmica-theme';
+function setTheme(mode){const dark=mode==='dark';document.documentElement.classList.toggle('theme-dark',dark);$('themeToggle').textContent=dark?'☀':'☾';$('themeToggle').title=dark?'Tema chiaro':'Tema scuro';try{localStorage.setItem(THEME_KEY,dark?'dark':'light');}catch{}}
 function midiOptedIn(){try{return localStorage.getItem(MIDI_OPT_IN)==='1';}catch{return false;}}
 function rememberMidiOptIn(){try{localStorage.setItem(MIDI_OPT_IN,'1');}catch{}}
 async function connectMIDI({automatic=false}={}){
@@ -745,7 +850,7 @@ function renderWithVex(){const V=VF(),holder=$('scoreHolder');holder.textContent
        if(!ev.rest&&!ev.pitches.length&&typeof n.setStyle==='function')n.setStyle({fillStyle:'#9bb5bd',strokeStyle:'#9bb5bd'});
        if(ev.id===selectedId && !ev.rest && typeof n.setStyle==='function')n.setStyle({fillStyle:'#168fc6',strokeStyle:'#168fc6'});
        notes.push(n);renderedMap.set(ev.id,{note:n,event:ev,staff:st,part,voice:vi,ctx});if(ev.tuplet){if(!groups.has(ev.tuplet))groups.set(ev.tuplet,[]);groups.get(ev.tuplet).push(n);}}
-      for(const a of groups.values())if(a.length===3){try{tuplets.push(new V.Tuplet(a,{num_notes:3,notes_occupied:2}));}catch(e){console.warn('tuplet',e);}}
+      for(const a of groups.values())if(a.length>=2){try{tuplets.push(new V.Tuplet(a,{num_notes:3,notes_occupied:2}));}catch(e){console.warn('tuplet',e);}}
       if(notes.length){const voice=new V.Voice({num_beats:score.meter[0],beat_value:score.meter[1]});voice.setMode(V.Voice.Mode.SOFT);voice.addTickables(notes);voice.setStave(st);allVoices.push(voice);notesByVoice.push({voice,notes,part,vi,events:es,staff:st,hasTwoVoices});}
      }
    }
@@ -842,14 +947,17 @@ function renderFallback(){const holder=$('scoreHolder');holder.innerHTML='';let 
   svg+=`</svg>`;box.innerHTML=svg;holder.append(box);for(const node of box.querySelectorAll('.note-hit'))node.addEventListener('click',()=>updateSelection(node.dataset.eventId));}
  $('engineDot').className='status-dot warn';$('engineInfo').textContent='Anteprima semplificata (VexFlow non disponibile)';}
 function renderScore(){$('scoreHolder').classList.toggle('galley',viewMode==='galley');try{if(VF())renderWithVex();else { $('scoreHolder').innerHTML='<p class="error">Impossibile caricare VexFlow. Controlla la connessione Internet e ricarica la pagina.</p>'; $('engineInfo').textContent='VexFlow non caricato'; }}catch(err){console.error(err);$('scoreHolder').innerHTML='<p class="error">Errore di notazione. Controlla la console del browser.</p>'; $('engineInfo').textContent='Errore notazione';}let errors=[];
- for(const p of score.parts)for(let i=0;i<2;i++){const events=p.voices[i];let t=0,bar=0;for(const e of events){if(t+measureTicks(e)>barCapacity(bar)+.0001){errors.push(`durata fuori battuta ${p.name}/voce ${i+1}`);break;}t+=measureTicks(e);if(t===barCapacity(bar)){t=0;bar++;}}for(const grp of new Set(events.filter(e=>e.tuplet).map(e=>e.tuplet))){if(events.filter(e=>e.tuplet===grp).length!==3)errors.push(`terzina incompleta ${p.name}/voce ${i+1}`);}}
+ for(const p of score.parts)for(let i=0;i<2;i++){const events=p.voices[i];let t=0,bar=0;for(const e of events){if(t+measureTicks(e)>barCapacity(bar)+.0001){errors.push(`durata fuori battuta ${p.name}/voce ${i+1}`);break;}t+=measureTicks(e);if(t===barCapacity(bar)){t=0;bar++;}}for(const grp of new Set(events.filter(e=>e.tuplet).map(e=>e.tuplet))){if(!expectedTuplet(events.filter(e=>e.tuplet===grp)))errors.push(`terzina incompleta ${p.name}/voce ${i+1}`);}}
  $('validation').textContent=errors.length?errors.join('; '):'';}
 // --- MUSICXML ---
 function xmlPitch(p){return `<pitch><step>${p.step}</step>${p.alter||keyAlter(p.step)!==0?`<alter>${p.alter}</alter>`:''}<octave>${p.octave}</octave></pitch>`;}
 function eventXML(e,v,idx,list,staff=1){
  const dt=measureTicks(e),type=({'1':'32nd','2':'16th','3':'eighth','4':'quarter','5':'half','6':'whole','64th':'64th'})[e.base],tag=`<voice>${v+1}</voice><type>${type}</type>${e.dot?'<dot/>':''}`;
  const common=e.grace?`<grace slash="${e.grace==='acciaccatura'?'yes':'no'}"/>`:`<duration>${dt}</duration>`;
- if(e.rest)return `<note><rest/>${common}${tag}${e.tuplet?'<time-modification><actual-notes>3</actual-notes><normal-notes>2</normal-notes><normal-type>'+type+'</normal-type></time-modification>':''}<staff>${staff}</staff></note>`;
+ if(e.rest){
+   let nt='';if(e.tuplet){const group=list.filter(x=>x.tuplet===e.tuplet),at=group.findIndex(x=>x.id===e.id);if(at===0)nt='<notations><tuplet type="start" number="1"/></notations>';if(at===group.length-1)nt='<notations><tuplet type="stop" number="1"/></notations>';}
+   return `<note><rest/>${common}${tag}${e.tuplet?'<time-modification><actual-notes>3</actual-notes><normal-notes>2</normal-notes></time-modification>':''}<staff>${staff}</staff>${nt}</note>`;
+ }
  let result='';const pitches=e.pitches.length?e.pitches:[{step:'B',alter:0,octave:4,midi:71}];
  const prev=idx>0?list[idx-1]:null,next=idx+1<list.length?list[idx+1]:null;
  for(let j=0;j<pitches.length;j++){
@@ -857,7 +965,7 @@ function eventXML(e,v,idx,list,staff=1){
   let note=`<note>${j?'<chord/>':''}${e.grace?common:''}${xmlPitch(p)}${e.grace?'':common}`;
   if(tieStop)note+='<tie type="stop"/>';if(tieStart)note+='<tie type="start"/>';
   note+=tag;
-  if(e.tuplet)note+=`<time-modification><actual-notes>3</actual-notes><normal-notes>2</normal-notes><normal-type>${type}</normal-type></time-modification>`;
+  if(e.tuplet)note+=`<time-modification><actual-notes>3</actual-notes><normal-notes>2</normal-notes></time-modification>`;
   note+=`<staff>${staff}</staff>`;
   const ns=[];if(tieStop)ns.push('<tied type="stop"/>');if(tieStart)ns.push('<tied type="start"/>');
   if(e.tuplet){const group=list.filter(x=>x.tuplet===e.tuplet),at=group.findIndex(x=>x.id===e.id);if(at===0)ns.push('<tuplet number="1" type="start"/>');if(at===group.length-1)ns.push('<tuplet number="1" type="stop"/>');}
@@ -869,7 +977,7 @@ function blankXML(ticks,v,full=false,staff=1){if(ticks<=0)return '';let parts=[]
  if(full)return `<note><rest measure="yes"/><duration>${ticks}</duration><voice>${v+1}</voice><staff>${staff}</staff></note>`;
  while(left>0){let d=defs.find(d=>d.ticks<=left);if(!d){parts.push(`<forward><duration>${left}</duration></forward>`);break;}parts.push(`<note><rest/><duration>${d.ticks}</duration><voice>${v+1}</voice><type>${d.type}</type><staff>${staff}</staff></note>`);left-=d.ticks;}return parts.join('');
 }
-function canExport(){let flaws=[];for(const p of score.parts)for(const v of p.voices){for(const g of new Set(v.filter(e=>e.tuplet).map(e=>e.tuplet)))if(v.filter(e=>e.tuplet===g).length!==3)flaws.push('terzina incompleta');if(v.some(e=>!e.rest&&!e.pitches.length))flaws.push('note senza altezza');}return flaws;}
+function canExport(){let flaws=[];for(const p of score.parts)for(const v of p.voices){for(const g of new Set(v.filter(e=>e.tuplet).map(e=>e.tuplet)))if(!expectedTuplet(v.filter(e=>e.tuplet===g)))flaws.push('terzina incompleta');if(v.some(e=>!e.rest&&!e.pitches.length))flaws.push('note senza altezza');}return flaws;}
 function buildMusicXML(){
  const flaws=canExport();if(flaws.length)throw Error('Completa le terzine e assegna le altezze mancanti.');
  const n=barsCount(),groups=logicalParts();let xml=`<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">\n<score-partwise version="4.0">\n<work><work-title>${esc(score.title)}</work-title></work><movement-title>${esc(score.title)}</movement-title><part-list>`;
@@ -908,10 +1016,11 @@ async function loadProject(e){const f=e.target.files?.[0];if(!f)return;try{const
 // --- EXAMPLE & EVENTS ---
 function loadDemo(){saveUndo();score={title:'Esempio di trascrizione barocca',meter:[4,4],fifths:0,mode:'major',tempo:108,parts:[newPart('violin'),newPart('bass')]};const first=[72,74,76,79,77,76,74,72,71,69,71,72,74,72,71,69];for(const [i,m] of first.entries())score.parts[0].voices[0].push({id:uid(),base:'3',dot:false,rest:false,pitches:[spellPitch(m)],tuplet:null,tieToNext:false});for(const m of [48,55,52,55,53,57,55,48])score.parts[1].voices[0].push({id:uid(),base:'4',dot:false,rest:false,pitches:[spellPitch(m)],tuplet:null,tieToNext:false});chosenPart=score.parts[0].id;chosenVoice=0;selectedId=null;lastDotId=null;pendingTriplet=null;pitchIndex=0;armedSelectionId=null;rhythmsSincePitch=0;lastPitchEntryId=null;lastRhythmId=null;editContext='rhythm';refresh();toast('Caricato un breve esempio a due strumenti.');}
 function restoreKeyboardFocus(el){el.blur();}
-function setup(){for(const ins of INSTRUMENT_CHOICES){const o=document.createElement('option');o.value=ins.id;o.textContent=ins.name;$('instrumentPick').append(o);}const h=$('durationKeys');for(const d of DURATIONS){let b=document.createElement('button');b.id='dur-'+d.key;b.className='dur-key'+(durationKey===d.key?' selected':'');b.title=d.name;b.innerHTML=`<span class="music">${d.symbol}</span><small>${d.key}</small>`;b.addEventListener('click',e=>placeRhythm(d.key,e.shiftKey));b.addEventListener('contextmenu',e=>{e.preventDefault();placeRhythm(d.key,true);});h.append(b);}h.append(Object.assign(document.createElement('button'),{className:'dur-key',innerHTML:'<span class="music">𝄽</span><small>Pausa +</small>',title:'Aggiungi una nuova pausa della durata selezionata'}));h.lastChild.addEventListener('click',insertRest);h.append(Object.assign(document.createElement('button'),{className:'dur-key',innerHTML:'<span class="music">·</span><small>.</small>',title:'Punto dopo l’ultima figura'}));h.lastChild.addEventListener('click',applyDot);
+function setup(){for(const ins of INSTRUMENT_CHOICES){const o=document.createElement('option');o.value=ins.id;o.textContent=ins.name;$('instrumentPick').append(o);}const h=$('durationKeys');for(const d of DURATIONS){let b=document.createElement('button');b.id='dur-'+d.key;b.className='dur-key'+(durationKey===d.key?' selected':'');b.title=d.name;b.innerHTML=`<span class="music">${d.symbol}</span><small>${d.key}</small>`;b.addEventListener('click',e=>{placeRhythm(d.key,e.shiftKey);b.blur();});b.addEventListener('contextmenu',e=>{e.preventDefault();placeRhythm(d.key,true);});h.append(b);}h.append(Object.assign(document.createElement('button'),{className:'dur-key',innerHTML:'<span class="music">𝄽</span><small>Pausa +</small>',title:'Aggiungi una nuova pausa della durata selezionata'}));h.lastChild.addEventListener('click',insertRest);h.append(Object.assign(document.createElement('button'),{className:'dur-key',innerHTML:'<span class="music">·</span><small>.</small>',title:'Punto dopo l’ultima figura'}));h.lastChild.addEventListener('click',applyDot);
  const p=$('piano');for(let i=0;i<12;i++){const semitone=i,names=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'],b=document.createElement('button');b.className='pkey'+([1,3,6,8,10].includes(i)?' black':'');b.textContent=names[i];b.title=names[i]+pitchOctave;b.addEventListener('click',()=>assignPitches([12*(pitchOctave+1)+semitone]));p.append(b);}
- const events={addStaff,removeStaff,connectMidi:connectMIDI,undo,redo,play:startPlayback,stop:stopPlayback,saveProject,openProject:()=>$('projectFile').click(),exportXML:exportMusicXML,tripletButton:beginTriplet,tieButton:toggleTie,deleteButton:backspace,clearAll,respell,demo:loadDemo,octDown:()=>setOctave(pitchOctave-1),octUp:()=>setOctave(pitchOctave+1)};
+ const events={addStaff,removeStaff,connectMidi:connectMIDI,undo,redo,play:startPlayback,stop:stopPlayback,saveProject,openProject:()=>$('projectFile').click(),exportXML:exportMusicXML,tripletButton:beginTriplet,mixedTripletButton:beginMixedTriplet,tieButton:toggleTie,deleteButton:backspace,clearAll,respell,demo:loadDemo,octDown:()=>setOctave(pitchOctave-1),octUp:()=>setOctave(pitchOctave+1)};
  for(const [id,action] of Object.entries(events))$(id).addEventListener('click',action);for(const b of document.querySelectorAll('[data-acc]'))b.addEventListener('click',()=>setAcc(Number(b.dataset.acc)));
+ $('tupletUnitPick').addEventListener('change',e=>restoreKeyboardFocus(e.target));
  $('voice').addEventListener('change',e=>{restoreKeyboardFocus(e.target);chosenVoice=Number(e.target.value);pitchIndex=0;selectedId=null;armedSelectionId=null;rhythmsSincePitch=0;seekPitch();refresh();});
  $('clef').addEventListener('change',e=>{changeClef(e.target.value);restoreKeyboardFocus(e.target);});
  $('meter').addEventListener('change',e=>{restoreKeyboardFocus(e.target);const next=e.target.value.split('/').map(Number),old=score.meter.slice();if(eventCount()){const prior=score.meter;score.meter=next;let bad=false;for(const part of score.parts)for(const voice of part.voices){let t=0;for(const ev of voice){if(t+measureTicks(ev)>TOTAL_BEATS()+.0001){bad=true;break;}t+=measureTicks(ev);if(t===TOTAL_BEATS())t=0;}}score.meter=prior;if(bad){e.target.value=old.join('/');toast('Il nuovo metro interromperebbe una nota. Completa o modifica il brano prima di cambiare metro.');return;}}saveUndo();score.meter=next;if(score.pickupTicks>=TOTAL_BEATS())score.pickupTicks=0;refresh();});
@@ -922,7 +1031,7 @@ function setup(){for(const ins of INSTRUMENT_CHOICES){const o=document.createEle
  $('tempo').addEventListener('change',e=>{restoreKeyboardFocus(e.target);saveUndo();score.tempo=Math.min(240,Math.max(30,Number(e.target.value)||100));refresh();});
  $('title').addEventListener('change',e=>{score.title=e.target.value.trim()||'Nuova trascrizione';refresh();});
  $('projectFile').addEventListener('change',loadProject);$('volume').addEventListener('input',e=>volume=Number(e.target.value)/100);$('midiInfo').textContent=midiGuidance();
- document.addEventListener('keydown',keyHandler);document.addEventListener('keyup',e=>{if(e.code==='Minus')graceHeld=false;});window.addEventListener('resize',()=>queueRender());insertTarget={partId:chosenPart,voice:0,bar:0,index:0};refresh();void autoConnectMIDI();setTimeout(queueRender,1300);
+ $('themeToggle').addEventListener('click',()=>setTheme(document.documentElement.classList.contains('theme-dark')?'light':'dark'));let savedTheme='';try{savedTheme=localStorage.getItem(THEME_KEY)||'';}catch{}setTheme(savedTheme==='dark'?'dark':(savedTheme==='light'?'light':window.matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'));document.addEventListener('keydown',keyHandler);document.addEventListener('keyup',e=>{if(e.code==='Minus')graceHeld=false;});window.addEventListener('resize',()=>queueRender());insertTarget={partId:chosenPart,voice:0,bar:0,index:0};refresh();void autoConnectMIDI();setTimeout(queueRender,1300);
 }
 function setOctave(n){pitchOctave=Math.max(1,Math.min(7,n));$('octaveText').textContent=pitchOctave;}
 function keyHandler(e){
@@ -939,11 +1048,11 @@ function keyHandler(e){
  const digitMatch=code.match(/^(?:Numpad|Digit)([1-9])$/);
  if(digitMatch&&!cmd){const n=Number(digitMatch[1]);e.preventDefault();if(n<=6)placeRhythm(String(n),e.shiftKey);else setAcc(({7:0,8:1,9:-1})[n]);return;}
  if(code==='Numpad0'||code==='Digit0'){e.preventDefault();toggleRest();return;}
- if((k==='t'||k==='T')&&!cmd){e.preventDefault();beginTriplet();return;}
+ if((k==='t'||k==='T')&&!cmd){e.preventDefault();if(e.shiftKey)beginMixedTriplet();else beginTriplet();return;}
  if(/^[a-g]$/i.test(k)&&!cmd){e.preventDefault();const midi=12*(pitchOctave+1)+SEMIS[k.toUpperCase()];assignPitches([midi]);return;}
  if(k==='['){e.preventDefault();setOctave(pitchOctave-1);}if(k===']'){e.preventDefault();setOctave(pitchOctave+1);}
 }
-window.RitmicaDebug={getXML:buildMusicXML,addInstrument:(type)=>{ $('instrumentPick').value=type;addStaff();},setPickup:t=>{score.pickupTicks=t;refresh();},setGrace:val=>{gracePending=val;},clickEmptyStaff,logicalParts,barCapacity,eventMeasures,findEventBar,getScore:()=>clone(score),splitAcrossBars,insertAtCursor,getLastPitch:()=>lastPitchEntryId,getEditContext:()=>editContext,getFocusPitch:()=>focusPitchId,isPlaying:()=>playing,getPlayhead:()=>playHead,autoConnectMIDI,connectMIDI,midiInputs,updatePlayheadCSS,collapseAutoSplits,loadDemo,exportXML:()=>{const flaws=canExport();if(flaws.length)throw Error(flaws.join(', '));return score;},insert:key=>placeRhythm(key),dot:applyDot,pitch:notes=>assignPitches(notes),toggleRest,deleteEvent,deletePitch,backspace,clearAll,respell,movePitch,updateSelection,changeClef,measureTicks,intervalWarning,spellPitch,minorKeyInfo,spellingContext,systemsFor,focusScoreSelection,selectMode:mode=>{score.mode=mode;refresh();},selectKey:fifths=>{score.fifths=fifths;refresh();},view:mode=>{viewMode=mode;queueRender();},receiveMIDI:bytes=>midiMessage({data:bytes})};
+window.RitmicaDebug={getXML:buildMusicXML,addInstrument:(type)=>{ $('instrumentPick').value=type;addStaff();},setPickup:t=>{score.pickupTicks=t;refresh();},setGrace:val=>{gracePending=val;},clickEmptyStaff,logicalParts,barCapacity,eventMeasures,findEventBar,getScore:()=>clone(score),splitAcrossBars,insertAtCursor,getLastPitch:()=>lastPitchEntryId,getEditContext:()=>editContext,getFocusPitch:()=>focusPitchId,isPlaying:()=>playing,getPlayhead:()=>playHead,autoConnectMIDI,connectMIDI,midiInputs,updatePlayheadCSS,collapseAutoSplits,loadDemo,exportXML:()=>{const flaws=canExport();if(flaws.length)throw Error(flaws.join(', '));return score;},insert:key=>placeRhythm(key),dot:applyDot,pitch:notes=>assignPitches(notes),toggleRest,deleteEvent,deletePitch,backspace,clearAll,respell,beginMixedTriplet,expectedTuplet,movePitch,updateSelection,changeClef,measureTicks,intervalWarning,spellPitch,minorKeyInfo,spellingContext,systemsFor,focusScoreSelection,selectMode:mode=>{score.mode=mode;refresh();},selectKey:fifths=>{score.fifths=fifths;refresh();},view:mode=>{viewMode=mode;queueRender();},receiveMIDI:bytes=>midiMessage({data:bytes})};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
 
@@ -981,20 +1090,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   <div class="topbar">
     <div><input id="title" class="document-name" value="Nuova trascrizione" aria-label="Titolo"><div id="documentCaption"></div></div>
     <div class="top-actions">
-      <button class="btn" id="undo" title="Annulla">↶</button><button class="btn" id="redo" title="Ripristina">↷</button>
-      <button class="btn" id="play">▶</button><button class="btn" id="stop">■</button>
+      <button class="btn icon-btn" id="undo" title="Annulla">↶</button><button class="btn icon-btn" id="redo" title="Ripristina">↷</button><span class="topbar-divider"></span>
+      <button class="btn icon-btn" id="play" title="Riproduci">▶</button><button class="btn icon-btn" id="stop" title="Ferma">■</button><span class="topbar-divider"></span>
       <button class="btn" id="saveProject">Salva</button><button class="btn" id="openProject">Apri</button><button class="btn" id="clearAll" title="Elimina tutti i ritmi e le altezze, conservando strumenti e impostazioni">Pulisci tutto</button><input type="file" accept=".json,application/json" id="projectFile">
-      <button class="btn primary" id="exportXML">MusicXML ↓</button>
+      <button class="btn icon-btn" id="themeToggle" title="Tema chiaro/scuro" aria-label="Cambia tema">☾</button><button class="btn primary" id="exportXML">MusicXML ↓</button>
     </div>
   </div>
   <div class="workspace">
     <div class="tools">
       <div class="tool-card durations"><span class="tag">Ritmi</span><div class="dur-grid" id="durationKeys"></div></div>
       <div class="tool-card modifiers"><span class="tag">Modifiche</span>
-        <div class="pill-controls"><button class="btn" id="tripletButton" title="Terzina (T)">3:2</button><button class="btn" id="tieButton" title="Legatura di valore (S)">⌒</button><button class="btn" id="deleteButton" title="Backspace: cancella altezza dopo MIDI, figura dopo ritmi">⌫</button><button class="btn" id="respell" title="Cambia enarmonia (Invio)">♯⇄♭</button></div>
+        <div class="pill-controls"><button class="btn" id="tripletButton" title="Terzina rapida: T e tre note uguali">3:2</button><button class="btn" id="mixedTripletButton" title="Terzina mista: Shift+T. Scegli l’unità e completa tre unità con note e pause diverse">3:2 mista</button><select id="tupletUnitPick" title="Unità della terzina mista" aria-label="Unità terzina mista"><option value="3">♪</option><option value="4">♩</option><option value="2">𝅘𝅥𝅯</option><option value="1">𝅘𝅥𝅰</option><option value="5">𝅗𝅥</option></select><button class="btn" id="tieButton" title="Legatura di valore (S)">⌒</button><button class="btn" id="deleteButton" title="Backspace: cancella altezza dopo MIDI, figura dopo ritmi">⌫</button><button class="btn" id="respell" title="Cambia enarmonia (Invio)">♯⇄♭</button></div>
         <div class="pill-controls"><button class="btn" data-acc="0" title="Bequadro (7)">♮</button><button class="btn" data-acc="1" title="Diesis (8)">♯</button><button class="btn" data-acc="-1" title="Bemolle (9)">♭</button></div>
       </div>
-      <div class="shortcut-help">1–6 figura · 0 pausa ↔ nota · ⇧1–6 nuova pausa · . punto<br>MIDI altezza · ↑↓ sposta · Invio enarmonia · S legatura · ⌫ cancella<br>− + durata acciaccatura · ⇧− appoggiatura · clic sul rigo inserisce</div>
+      <div class="shortcut-help">1–6 figura · 0 pausa ↔ nota · ⇧1–6 nuova pausa · . punto<br>MIDI altezza · ↑↓ sposta · Invio enarmonia · S legatura · ⌫ cancella<br>T terzina rapida · ⇧T terzina mista · − acciaccatura · ⇧− appoggiatura</div>
     </div>
     <div class="info-line"><span id="selectionInfo"></span><span><i class="status-dot" id="engineDot"></i><span id="engineInfo"></span></span></div>
     <div class="paper"><div class="paper-header"><label>Vista <select id="viewMode" aria-label="Vista partitura"><option value="galley">Galley orizzontale</option><option value="page">Pagina</option></select></label><span id="scoreStats"></span></div><div id="scoreHolder" class="score-holder galley"></div></div>
